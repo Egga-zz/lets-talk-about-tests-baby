@@ -1,33 +1,3 @@
-/*
-    So you like the style of impress.js demo?
-    Or maybe you are just curious how it was done?
-
-    You couldn't find a better place to find out!
-
-    Welcome to the stylesheet impress.js demo presentation.
-
-    Please remember that it is not meant to be a part of impress.js and is
-    not required by impress.js.
-    I expect that anyone creating a presentation for impress.js would create
-    their own set of styles.
-
-    But feel free to read through it and learn how to get the most of what
-    impress.js provides.
-
-    And let me be your guide.
-
-    Shall we begin?
-*/
-
-
-/*
-    We start with a good ol' reset.
-    That's the one by Eric Meyer http://meyerweb.com/eric/tools/css/reset/
-
-    You can probably argue if it is needed here, or not, but for sure it
-    doesn't do any harm and gives us a fresh start.
-*/
-
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -124,17 +94,7 @@ a:focus {
     text-shadow: -1px -1px 2px rgba(100,100,100,0.5);
 }
 
-/*
-    Because the main point behind the impress.js demo is to demo impress.js
-    we display a fallback message for users with browsers that don't support
-    all the features required by it.
 
-    All of the content will be still fully accessible for them, but I want
-    them to know that they are missing something - that's what the demo is
-    about, isn't it?
-
-    And then we hide the message, when support is detected in the browser.
-*/
 
 .fallback-message {
     font-family: sans-serif;
@@ -701,3 +661,16 @@ a:focus {
     Thanks for reading. I hope you enjoyed it at least as much as I enjoyed writing it
     for you.
 */
+pre {
+-moz-border-radius: 10px;
+-webkit-border-radius: 10px;
+border-radius: 10px;
+background: #f5f5f5;
+border: 5px solid #bbb;
+margin: 0 0 40px 0;
+padding: 20px;
+word-wrap: break-word;
+font-family: monospace,serif;
+_font-family: "courier new",monospace;
+font-size: 1em;
+}
