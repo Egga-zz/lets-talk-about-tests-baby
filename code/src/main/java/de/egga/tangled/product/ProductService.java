@@ -1,10 +1,7 @@
 package de.egga.tangled.product;
 
-import de.egga.tangled.shop.Shop;
+import java.util.UUID;
 
-import java.util.List;
-
-import static java.util.Arrays.asList;
 import static java.util.UUID.randomUUID;
 
 /**
@@ -12,10 +9,7 @@ import static java.util.UUID.randomUUID;
  */
 public class ProductService {
 
-    public List<Product> findProductsOfShop(final Shop shop) {
-        return asList(
-                new Product(randomUUID(), "first product"),
-                new Product(randomUUID(), "second product")
-        );
+    public Product findById(final UUID productId) {
+        return new Product(randomUUID(), "some product");
     }
 }

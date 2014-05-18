@@ -1,6 +1,6 @@
 package de.egga.tangled.controllers;
 
-import de.egga.tangled.location.Location;
+import com.javadocmd.simplelatlng.LatLng;
 import de.egga.tangled.location.LocationService;
 import de.egga.tangled.product.Product;
 import de.egga.tangled.product.ProductService;
@@ -22,13 +22,15 @@ public class ProductHelper {
     private ShopService shopService;
 
 
-    public List<Product> getProductsInCity(final UUID shopId, final UUID locationID) {
-        Shop shop = shopService.findById(shopId);
-        Location location = locationService.findById(locationID);
+    public List<Shop> getNearestShopsOfProduct(final UUID productId, final LatLng location) {
 
-        List<Product> products = productService.findProductsOfShop(shop);
+        Product product = productService.findById(productId);
 
-        return products;
+        List<Shop> shops = shopService.findShopsByProduct(product);
+
+        List<Shop> sortedShops = locationService.sortByDistance(location, shops);
+
+        return sortedShops;
     }
 
 
