@@ -24,6 +24,13 @@ public class Shop {
         this.location = location;
     }
 
+    @Override
+    public String toString() {
+        return "Shop{" +
+                "name='" + name + '\'' +
+                '}';
+    }
+
     public UUID getId() {
         return id;
     }

@@ -12,10 +12,21 @@ import java.util.UUID;
  */
 public class ProductController {
 
+    private final static Double DEFAULT_MAX_DISTANCE = 500d;
+
+
     private ProductHelper helper;
 
-    public List<Shop> getNearestBranchesOfProduct(@NotNull UUID productId, @NotNull Double latitude, @NotNull Double longitude) {
+    public List<Shop> getNearestBranchesOfProduct(
+            @NotNull UUID productId,
+            @NotNull Double latitude,
+            @NotNull Double longitude,
+            Double maxDistance
+    ) {
         LatLng location = new LatLng(latitude, longitude);
-        return helper.getNearestShopsOfProduct(productId, location);
+        if (maxDistance == null) {
+            maxDistance = DEFAULT_MAX_DISTANCE;
+        }
+        return helper.getNearestShopsOfProduct(productId, location, maxDistance);
     }
 }

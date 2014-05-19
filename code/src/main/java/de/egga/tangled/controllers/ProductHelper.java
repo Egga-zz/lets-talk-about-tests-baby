@@ -7,6 +7,7 @@ import de.egga.tangled.product.ProductService;
 import de.egga.tangled.shop.Shop;
 import de.egga.tangled.shop.ShopService;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.UUID;
@@ -19,29 +20,37 @@ import static java.util.Collections.sort;
  */
 public class ProductHelper {
 
-    private static final LengthUnit DEFAULT_UNIT = LengthUnit.METER;
+    private static final LengthUnit DEFAULT_UNIT = LengthUnit.KILOMETER;
 
     private ProductService productService;
 
     private ShopService shopService;
 
 
-    public List<Shop> getNearestShopsOfProduct(final UUID productId, final LatLng location) {
+    public List<Shop> getNearestShopsOfProduct(final UUID productId, final LatLng location, final Double maxDistance) {
 
         Product product = productService.findById(productId);
 
         List<Shop> shops = shopService.findShopsByProduct(product);
 
-        sort(shops, new Comparator<Shop>() {
+        List<Shop> relevantShops = new ArrayList<Shop>();
+        for (Shop shop : shops) {
+            Double distance = calculateDistance(shop, location);
+            if (distance < maxDistance) {
+                relevantShops.add(shop);
+            }
+        }
+
+        sort(relevantShops, new Comparator<Shop>() {
             @Override
             public int compare(final Shop o1, final Shop o2) {
                 Double distance1 = calculateDistance(o1, location);
                 Double distance2 = calculateDistance(o2, location);
-                return distance1.compareTo(distance2);
+                return distance2.compareTo(distance1);
             }
         });
 
-        return shops;
+        return relevantShops;
     }
 
     private double calculateDistance(final Shop o1, final LatLng location) {

@@ -71,7 +71,7 @@ public class ProductHelperTest {
 
         replay(productService, shopService);
 
-        List<Shop> shops = helper.getNearestShopsOfProduct(product.getId(), hamburg);
+        List<Shop> shops = helper.getNearestShopsOfProduct(product.getId(), hamburg, 1000d);
 
         verify(productService, shopService);
 
