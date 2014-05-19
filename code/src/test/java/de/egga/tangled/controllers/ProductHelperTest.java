@@ -8,6 +8,7 @@ import de.egga.tangled.shop.ShopService;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static java.util.Arrays.asList;
@@ -77,5 +78,62 @@ public class ProductHelperTest {
 
         assertThat(shops, hasSize(2));
         assertThat(shops.get(0).getName(), is(equalTo("Berlin")));
+        assertThat(shops.get(1).getName(), is(equalTo("Zagreb")));
+    }
+
+    @Test
+    public void shouldHandleEmptyList() {
+        LatLng hamburg = new LatLng(53.5653, 10.0014);
+
+        Product product = new Product();
+        product.setId(randomUUID());
+        product.setName("some product");
+
+        expect(productService.findById(product.getId())).andReturn(product);
+
+        expect(shopService.findShopsByProduct(product)).andReturn(new ArrayList<Shop>());
+
+        replay(productService, shopService);
+
+        List<Shop> shops = helper.getNearestShopsOfProduct(product.getId(), hamburg, 1000d);
+
+        verify(productService, shopService);
+
+        assertThat(shops, hasSize(0));
+    }
+
+    @Test
+    public void shouldIgnoreFarShops() {
+        LatLng paris = new LatLng(48.8567, 2.3508);
+
+        Product product = new Product();
+        product.setId(randomUUID());
+        product.setName("some product");
+
+
+        Shop berlin = new Shop();
+        berlin.setId(randomUUID());
+        berlin.setName("Zagreb");
+        berlin.setLocation(new LatLng(52.5167, 13.3833));
+
+        Shop zagreb = new Shop();
+        zagreb.setId(randomUUID());
+        zagreb.setName("Berlin");
+        zagreb.setLocation(new LatLng(45.8167, 15.9833));
+
+        expect(productService.findById(product.getId())).andReturn(product);
+
+        expect(shopService.findShopsByProduct(product)).andReturn(asList(
+                zagreb,
+                berlin
+        ));
+
+        replay(productService, shopService);
+
+        List<Shop> shops = helper.getNearestShopsOfProduct(product.getId(), paris, 10d);
+
+        verify(productService, shopService);
+
+        assertThat(shops, hasSize(0));
     }
 }

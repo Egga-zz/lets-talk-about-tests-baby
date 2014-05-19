@@ -1,7 +1,6 @@
 package de.egga.tangled.controllers;
 
 import com.javadocmd.simplelatlng.LatLng;
-import com.sun.istack.internal.NotNull;
 import de.egga.tangled.shop.Shop;
 
 import java.util.List;
@@ -18,9 +17,9 @@ public class ProductController {
     private ProductHelper helper;
 
     public List<Shop> getNearestBranchesOfProduct(
-            @NotNull UUID productId,
-            @NotNull Double latitude,
-            @NotNull Double longitude,
+            UUID productId,
+            Double latitude,
+            Double longitude,
             Double maxDistance
     ) {
         LatLng location = new LatLng(latitude, longitude);
