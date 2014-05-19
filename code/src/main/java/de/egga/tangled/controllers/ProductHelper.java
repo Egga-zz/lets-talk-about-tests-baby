@@ -1,21 +1,25 @@
 package de.egga.tangled.controllers;
 
 import com.javadocmd.simplelatlng.LatLng;
-import de.egga.tangled.location.LocationService;
+import com.javadocmd.simplelatlng.util.LengthUnit;
 import de.egga.tangled.product.Product;
 import de.egga.tangled.product.ProductService;
 import de.egga.tangled.shop.Shop;
 import de.egga.tangled.shop.ShopService;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.UUID;
+
+import static com.javadocmd.simplelatlng.LatLngTool.distance;
+import static java.util.Collections.sort;
 
 /**
  * @author egga
  */
 public class ProductHelper {
 
-    private LocationService locationService;
+    private static final LengthUnit DEFAULT_UNIT = LengthUnit.METER;
 
     private ProductService productService;
 
@@ -28,14 +32,20 @@ public class ProductHelper {
 
         List<Shop> shops = shopService.findShopsByProduct(product);
 
-        List<Shop> sortedShops = locationService.sortByDistance(location, shops);
+        sort(shops, new Comparator<Shop>() {
+            @Override
+            public int compare(final Shop o1, final Shop o2) {
+                Double distance1 = calculateDistance(o1, location);
+                Double distance2 = calculateDistance(o2, location);
+                return distance1.compareTo(distance2);
+            }
+        });
 
-        return sortedShops;
+        return shops;
     }
 
-
-    public void setLocationService(final LocationService locationService) {
-        this.locationService = locationService;
+    private double calculateDistance(final Shop o1, final LatLng location) {
+        return distance(location, o1.getLocation(), DEFAULT_UNIT);
     }
 
     public void setProductService(final ProductService productService) {
