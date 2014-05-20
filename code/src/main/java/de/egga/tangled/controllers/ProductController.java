@@ -13,10 +13,9 @@ public class ProductController {
 
     private final static Double DEFAULT_MAX_DISTANCE = 500d;
 
-
     private ProductHelper helper;
 
-    public List<Shop> getNearestBranchesOfProduct(
+    public List<Shop> getNearestShopsOfProduct(
             UUID productId,
             Double latitude,
             Double longitude,
@@ -27,5 +26,9 @@ public class ProductController {
             maxDistance = DEFAULT_MAX_DISTANCE;
         }
         return helper.getNearestShopsOfProduct(productId, location, maxDistance);
+    }
+
+    public void setHelper(final ProductHelper helper) {
+        this.helper = helper;
     }
 }

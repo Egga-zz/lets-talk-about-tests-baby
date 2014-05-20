@@ -31,10 +31,6 @@ public class Shop {
                 '}';
     }
 
-    public UUID getId() {
-        return id;
-    }
-
     public void setId(final UUID id) {
         this.id = id;
     }
