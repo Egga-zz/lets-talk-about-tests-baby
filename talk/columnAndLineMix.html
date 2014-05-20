@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <title>amCharts examples</title>
+        <link rel="stylesheet" href="style.css" type="text/css">
+        <script src="amcharts.js" type="text/javascript"></script>
+        <script src="serial.js" type="text/javascript"></script>
+        
+        <script type="text/javascript">
+            var chart;
+            var chartData = [
+                {
+                    "commit": "before",
+                    "total": 139,
+                    "tests": 91
+                },
+                {
+                    "commit": "after",
+                    "total": 112,
+                    "tests": 27
+                }
+            ];
+
+
+            AmCharts.ready(function () {
+                // SERIAL CHART  
+                chart = new AmCharts.AmSerialChart();
+
+                chart.dataProvider = chartData;
+                chart.categoryField = "commit";
+                chart.startDuration = 1;
+                
+                chart.handDrawn = true;
+                chart.handDrawnScatter = 3;
+
+                // AXES
+                // category
+                var categoryAxis = chart.categoryAxis;
+                categoryAxis.gridPosition = "start";
+
+                // value
+                var valueAxis = new AmCharts.ValueAxis();
+                valueAxis.axisAlpha = 0;
+                chart.addValueAxis(valueAxis);
+
+                // GRAPHS
+                // column graph
+                var graph1 = new AmCharts.AmGraph();
+                graph1.type = "column";
+                graph1.title = "Total Lines of Code";
+                graph1.lineColor = "#a668d5";
+                graph1.valueField = "total";
+                graph1.lineAlpha = 1;
+                graph1.fillAlphas = 1;
+                graph1.dashLengthField = "dashLengthColumn";
+                graph1.alphaField = "alpha";
+                graph1.labelText = "[[value]]";
+                graph1.showBalloon = false;
+                chart.addGraph(graph1);
+
+                // line
+                var graph2 = new AmCharts.AmGraph();
+                graph2.type = "line";
+                graph2.title = "Lines of Code in Test Methods";
+                graph2.lineColor = "#fcd202";
+                graph2.valueField = "tests";
+                graph2.lineThickness = 3;
+                graph2.bullet = "round";
+                graph2.bulletBorderThickness = 3;
+                graph2.bulletBorderColor = "#fcd202";
+                graph2.bulletBorderAlpha = 1;
+                graph2.labelText = "[[value]]";
+                graph2.bulletColor = "#ffffff";
+                graph2.dashLengthField = "dashLengthLine";
+                graph2.showBalloon = false;
+                chart.addGraph(graph2);
+
+                // LEGEND                
+                var legend = new AmCharts.AmLegend();
+                legend.useGraphSettings = true;
+                chart.addLegend(legend);
+
+                // WRITE
+                chart.write("chartdiv");
+            });
+        </script>
+    </head>
+    
+    <body>
+        <div id="chartdiv" style="width:600px; height:400px;"></div>
+    </body>
+
+</html>
