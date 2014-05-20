@@ -1,0 +1,29 @@
+mostly ide supported refactoring, some small but trivial manual adjustments 
+extract constants
+create factory methods -> parameterized factories -> builders
+replay in setup -> method that calls replay
+verify in teardown
+
+bug: 
+
+----> 
+Shop berlin = new Shop();
+berlin.setId(randomUUID());
+berlin.setName("Zagreb");
+berlin.setLocation(new LatLng(52.5167, 13.3833));
+
+Shop zagreb = new Shop();
+zagreb.setId(randomUUID());
+zagreb.setName("Berlin");
+zagreb.setLocation(new LatLng(45.8167, 15.9833));
+<<>>
+private final Shop berlin = createShop("Berlin", 52.5167, 13.3833);
+private final Shop zagreb = createShop("Zagreb", 45.8167, 15.9833);
+<----
+
+==>return distance2.compareTo(distance1);
+
+readable tests:
+total lines: 139 -> 112 
+test methods 91 -> 27
+

@@ -46,7 +46,7 @@ public class ProductHelper {
             public int compare(final Shop o1, final Shop o2) {
                 Double distance1 = calculateDistance(o1, location);
                 Double distance2 = calculateDistance(o2, location);
-                return distance2.compareTo(distance1);
+                return distance1.compareTo(distance2);
             }
         });
 
