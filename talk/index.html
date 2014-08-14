@@ -10,6 +10,7 @@
     <meta name="author" content="Egga (Jan Hartung)" />
 
     <link href="http://fonts.googleapis.com/css?family=Open+Sans:regular,semibold,italic,italicsemibold|PT+Sans:400,700,400italic,700italic|PT+Serif:400,700,400italic,700italic" rel="stylesheet" />
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.1/styles/default.min.css">
 
     <link href="style.css" rel="stylesheet" />
     
@@ -25,21 +26,51 @@
 </div>
 
 <div id="impress">
-    <div id="its" class="step" data-x="850" data-y="3000" data-rotate="90" data-scale="5">
-	<h1>some code</h1>
-        <pre><code data-language="css">#body {
+    <div id="its" class="step" data-x="0" data-y="0" data-scale="5">
+	<h1>css</h1>
+        <pre><code data-language="css">
+#body {
   background-color: #123134;
   text-align: center;
-}</code></pre>
+}
+        </code></pre>
     </div>
+</div>
+
+<div id="impress">
+    <div id="its" class="step" data-x="5000" data-y="0" data-scale="5">
+	<h1>java</h1>
+        <pre><code data-language="java" class="java">
+public class Dog{
+   String breed;
+   int age;
+   String color;
+
+   void bark(){
+   }
+}
+        </code></pre>
+    </div>
+</div>
+
+<div id="impress">
+    <div id="its" class="step" data-x="0" data-y="5000" data-scale="5">
+	<h1>javascript</h1>
+        <pre><code data-language="javascript">
+describe('Array', function(){
+  describe('#indexOf()', function(){
+    it('should return -1 when the value is not present')
+  })
+})
+        </code></pre>
+    </div>
+</div>
+
 
     
 
     <div id="overview" class="step" data-x="3000" data-y="1500" data-scale="10">
     </div>
-
-</div>
-
 
 <div class="hint">
     <p>Use a spacebar or arrow keys to navigate</p>
@@ -52,7 +83,10 @@ if ("ontouchstart" in document.documentElement) {
 
 <script src="impress.js"></script>
 <script>impress().init();</script>
-
+    
+    
+<script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.1/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
 </body>
 </html>
 
