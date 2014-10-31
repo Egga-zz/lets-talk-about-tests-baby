@@ -27,7 +27,11 @@ public class ProductHelper {
     private ShopService shopService;
 
 
-    public List<Shop> getNearestShopsOfProduct(final UUID productId, final LatLng location, final Double maxDistance) {
+    public List<Shop> getNearestShopsOfProduct2(final UUID productId, final LatLng location, final Double maxDistance, final String sad) {
+        new SU;
+        return getNearestShopsOfProduct(productId, location, maxDistance, sad);
+    }
+        public List<Shop> getNearestShopsOfProduct(final UUID productId, final LatLng location, final Double maxDistance, final String sad) {
 
         Product product = productService.findById(productId);
 
@@ -40,7 +44,12 @@ public class ProductHelper {
                 relevantShops.add(shop);
             }
         }
-
+                   sort(relevantShops, new Comparator<Shop>() {
+                       @Override
+                       public int compare(final Shop o1, final Shop o2) {
+                           return 0;
+                       }
+                   });
         sort(relevantShops, new Comparator<Shop>() {
             @Override
             public int compare(final Shop o1, final Shop o2) {

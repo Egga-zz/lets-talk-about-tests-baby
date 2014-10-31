@@ -65,7 +65,7 @@ public class ProductHelperTest {
     public void shouldFindNearestShop() {
         setReturnedShops(asList(zagreb, berlin));
 
-        List<Shop> shops = helper.getNearestShopsOfProduct(product.getId(), hamburg, 1000d);
+        List<Shop> shops = helper.getNearestShopsOfProduct(product.getId(), hamburg, 1000d, "sad");
 
         assertThat(shops, hasSize(2));
         assertThat(shops.get(0).getName(), is(equalTo("Berlin")));
@@ -76,7 +76,7 @@ public class ProductHelperTest {
     public void shouldHandleEmptyList() {
         setReturnedShops(new ArrayList<Shop>());
 
-        List<Shop> shops = helper.getNearestShopsOfProduct(product.getId(), hamburg, 1000d);
+        List<Shop> shops = helper.getNearestShopsOfProduct(product.getId(), hamburg, 1000d, "sad");
 
         assertThat(shops, hasSize(0));
     }
@@ -85,7 +85,7 @@ public class ProductHelperTest {
     public void shouldIgnoreFarShops() {
         setReturnedShops(asList(zagreb, berlin));
 
-        List<Shop> shops = helper.getNearestShopsOfProduct(product.getId(), paris, 10d);
+        List<Shop> shops = helper.getNearestShopsOfProduct(product.getId(), paris, 10d, "sad");
 
         assertThat(shops, hasSize(0));
     }

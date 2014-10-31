@@ -25,7 +25,7 @@ public class ProductController {
         if (maxDistance == null) {
             maxDistance = DEFAULT_MAX_DISTANCE;
         }
-        return helper.getNearestShopsOfProduct(productId, location, maxDistance);
+        return helper.getNearestShopsOfProduct(productId, location, maxDistance, "sad");
     }
 
     public void setHelper(final ProductHelper helper) {
